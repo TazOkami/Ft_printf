@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:27:38 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 12:44:04 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:54:28 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	ft_handle_pointer(va_list args)
 	}
 	write(1, "0x", 2);
 	ft_putptr((unsigned long)ptr);
-	return (2 + ft_count_hex_digits((unsigned long)ptr));
+	return (2 + ft_count_hex_digits((int)ptr));
 }
