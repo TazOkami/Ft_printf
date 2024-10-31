@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 10:10:11 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 10:42:03 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ int	ft_process_format(char format, va_list args)
 	return (0);
 }
 
+int	handle_format(const char **format, va_list args)
+{
+	int	error;
+
+	error = ft_process_format(*format, args);
+	if (error < 0)
+		return (handle_error(args));
+	return (error);
+}
+
+int	handle_error(va_list args)
+{
+	va_end(args);
+	return (-1);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int		count;
@@ -49,21 +65,14 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			error = ft_process_format(*format, args);
+			error = handle_format(&format, args);
 			if (error < 0)
-			{
-				va_end(args);
 				return (-1);
-			}
-			count += error;
 		}
 		else
 		{
 			if (write(1, format, 1) < 0)
-			{
-				va_end(args);
-				return (-1);
-			}
+				return (handle_error(args));
 			count++;
 		}
 		format++;
