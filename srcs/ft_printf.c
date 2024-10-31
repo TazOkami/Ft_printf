@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 11:50:52 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:19:24 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,20 @@ int	ft_process_format(char format, va_list args)
 	return (0);
 }
 
-int	ft_handle_error(va_list args)
+int	handle_char(const char *format)
 {
-	va_end(args);
-	return (-1);
+	if (write(1, format, 1) < 0)
+		return (-1);
+	return (1);
 }
 
-int	ft_handle_format(const char **format, va_list args)
+int	process_specifier(const char **format, va_list args)
 {
 	int	error;
 
 	error = ft_process_format(**format, args);
 	if (error < 0)
-		return (ft_handle_error(args));
+		return (-1);
 	return (error);
 }
 
@@ -62,19 +63,19 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	while (*format)
 	{
-		if (*format++ == '%')
+		if (*format == '%')
 		{
-			error = ft_handle_format(&format, args);
-			if (error < 0)
-				return (-1);
-			count += error;
+			format++;
+			error = process_specifier(&format, args);
 		}
 		else
+			error = handle_char(format);
+		if (error < 0)
 		{
-			if (write(1, format, 1) < 0)
-				return (ft_handle_error(args));
-			count++;
+			va_end(args);
+			return (-1);
 		}
+		count += error;
 		format++;
 	}
 	va_end(args);
