@@ -6,13 +6,13 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:27:38 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/28 15:48:06 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:44:04 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putptr(uintptr_t n)
+void	ft_putptr(unsigned long n)
 {
 	char	c;
 	char	*str ;
@@ -33,10 +33,10 @@ int	ft_handle_pointer(va_list args)
 	ptr = va_arg(args, void *);
 	if (ptr == NULL)
 	{
-		write(1, "(nil)", 5);
-		return (5);
+		write(1, "0x0", 3);
+		return (3);
 	}
 	write(1, "0x", 2);
-	ft_putptr((uintptr_t)ptr);
-	return (2 + ft_count_hex_digits((uintptr_t)ptr));
+	ft_putptr((unsigned long)ptr);
+	return (2 + ft_count_hex_digits((unsigned long)ptr));
 }

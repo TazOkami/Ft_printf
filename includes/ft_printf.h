@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:08 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 12:26:54 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:45:33 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 # include <stdarg.h>
-# include <stdint.h>
 
 int		ft_printf(const char *format, ...);
 int		ft_process_format(char format, va_list args);
@@ -32,12 +31,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putnbr_unsigned_fd(unsigned int n, int fd);
 void	ft_putnbr_hex(unsigned int n, int fd, int uppercase);
-int		ft_putptr_fd(uintptr_t ptr, int fd);
+void	ft_putptr(unsigned long ptr);
 void	ft_putstr_fd(char *s, int fd);
 size_t	ft_strlen(const char *s);
 int		ft_count_digits(int n);
 int		ft_count_unsigned_digits(unsigned int n);
-int		ft_count_hex_digits(uintptr_t n);
+int		ft_count_hex_digits(unsigned long n);
 int		ft_handle_error(va_list args);
 int		ft_handle_format(const char **format, va_list args);
 

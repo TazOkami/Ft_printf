@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 11:18:17 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/28 15:24:31 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:44:01 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putnbr_hex(unsigned int n, int fd, int uppercase)
 		ft_putchar_fd("0123456789abcdef"[n % 16], fd);
 }
 
-int	ft_count_hex_digits(uintptr_t n)
+int	ft_count_hex_digits(unsigned long n)
 {
 	int	count;
 
