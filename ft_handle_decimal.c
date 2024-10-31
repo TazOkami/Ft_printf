@@ -1,28 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_handle_decimal.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 08:33:33 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/20 11:03:24 by Jpaulis          ###   ########.fr       */
+/*   Created: 2024/10/26 16:06:29 by Jpaulis           #+#    #+#             */
+/*   Updated: 2024/10/31 15:53:28 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static void	ft_putnbr(int n)
 {
 	long	num;
+	char	c;
 
 	num = n;
 	if (num < 0)
 	{
 		num = -num;
-		ft_putchar_fd('-', fd);
+		write(1, "-", 1);
 	}
 	if (num > 9)
-		ft_putnbr_fd(num / 10, fd);
-	ft_putchar_fd((num % 10) + '0', fd);
+		ft_putnbr(num / 10);
+	c = (num % 10) + '0';
+	write(1, &c, 1);
+}
+
+static int	ft_count_digits(int n)
+{
+	int	count;
+
+	count = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		count++;
+		n = -n;
+	}
+	while (n != 0)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
+}
+
+int	ft_handle_decimal(va_list args)
+{
+	int	value;
+
+	value = va_arg(args, int);
+	ft_putnbr(value);
+	return (ft_count_digits(value));
 }

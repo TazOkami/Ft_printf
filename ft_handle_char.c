@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_handle_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 15:34:00 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/22 15:44:15 by Jpaulis          ###   ########.fr       */
+/*   Created: 2024/10/26 15:51:30 by Jpaulis           #+#    #+#             */
+/*   Updated: 2024/10/31 13:39:11 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Ajoute un nouveau maillon à la fi de la liste */
-#include "libft.h"
+/*va_arg est une macro qui extrait le prochain argument de la liste args*/
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+#include "ft_printf.h"
+
+int	ft_handle_char(va_list args)
 {
-	t_list	*last;
+	char	c;
 
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	last = ft_lstlast(*lst);
-	last->next = new;
+	c = (char) va_arg(args, int);
+	if (write(1, &c, 1) < 0)
+		return (-1);
+	return (1);
 }

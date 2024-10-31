@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_count_hex_digits.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 15:16:45 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/22 16:40:31 by Jpaulis          ###   ########.fr       */
+/*   Created: 2024/10/31 15:48:19 by Jpaulis           #+#    #+#             */
+/*   Updated: 2024/10/31 15:53:28 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Ajoute un élément au début de la liste chainée */
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int	ft_count_hex_digits(unsigned long n)
 {
-	if (!lst || !new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	int	count;
+
+	count = 0;
+	if (n == 0)
+		return (1);
+	while (n != 0)
+	{
+		n /= 16;
+		count++;
+	}
+	return (count);
 }

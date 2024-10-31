@@ -1,50 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 01:36:03 by  jpaulis          #+#    #+#             */
-/*   Updated: 2024/10/15 17:12:22 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 16:23:36 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*memchr - Cherche la première occurrence 
- *du caractère ch dans les premiers n octets
- *de la zone mémoire pointée par ptr.*/
-#include "libft.h"
+/* ft_strlen - Calcule la longueur 
+ * de la chaîne de caractères c 
+ * (ne compte pas le caractère nul '\0')
+ * Retourne la longueur de la chaîne de caractères
+ */
+#include "ft_printf.h"
 
-void	*ft_memchr(const void *ptr, int ch, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	unsigned char	*p;
+	size_t	i;
 
-	p = (unsigned char *)ptr;
-	while (n > 0)
-	{
-		if (*p == (unsigned char)ch)
-			return (p);
-		p++;
-		n--;
-	}
-	return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
 /*
 #include <stdio.h>
 
-void *ft_memchr(const void *ptr, int ch, size_t n);
-
 int main(void)
 {
-	const char str[] = "Hello, world!";
-	char *result;
+	char str[] = "Hello, world!";
+	int len = ft_strlen(str);
 
-	result = ft_memchr(str, 'o', 12);
-	if (result)
-		printf("Trouvé à la position : %ld\n", result - str);
-	else
-		printf("Non trouvé\n");
+	printf("Length: %d\n", len);
 
 	return 0;
 }

@@ -6,13 +6,13 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 13:19:24 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 16:20:31 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_process_format(char format, va_list args)
+static int	ft_process_format(char format, va_list args)
 {
 	if (format == 'c')
 		return (ft_handle_char(args));
@@ -36,14 +36,14 @@ int	ft_process_format(char format, va_list args)
 	return (0);
 }
 
-int	handle_char(const char *format)
+static int	ft_writ_char(char c)
 {
-	if (write(1, format, 1) < 0)
+	if (write(1, &c, 1) < 0)
 		return (-1);
 	return (1);
 }
 
-int	process_specifier(const char **format, va_list args)
+static int	ft_process_specifier(const char **format, va_list args)
 {
 	int	error;
 
@@ -66,10 +66,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			error = process_specifier(&format, args);
+			error = ft_process_specifier(&format, args);
 		}
 		else
-			error = handle_char(format);
+			error = ft_writ_char(*format);
 		if (error < 0)
 		{
 			va_end(args);

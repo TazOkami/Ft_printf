@@ -1,24 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_handle_char.c                                   :+:      :+:    :+:   */
+/*   ft_handle_pointer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 15:51:30 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/29 14:01:30 by Jpaulis          ###   ########.fr       */
+/*   Created: 2024/10/27 12:27:38 by Jpaulis           #+#    #+#             */
+/*   Updated: 2024/10/31 15:53:28 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*va_arg est une macro qui extrait le prochain argument de la liste args*/
-
 #include "ft_printf.h"
 
-int	ft_handle_char(va_list args)
+static void	ft_putptr(unsigned long n)
 {
 	char	c;
+	char	*str ;
 
-	c = (char) va_arg(args, int);
-	ft_putchar_fd(c, 1);
-	return (1);
+	str = "0123456789abcdef";
+	if (n >= 16)
+	{
+		ft_putptr(n / 16);
+	}
+	c = str[n % 16];
+	write(1, &c, 1);
+}
+
+int	ft_handle_pointer(va_list args)
+{
+	void	*ptr;
+
+	ptr = va_arg(args, void *);
+	if (ptr == NULL)
+	{
+		write(1, "0x0", 3);
+		return (3);
+	}
+	write(1, "0x", 2);
+	ft_putptr((unsigned long)ptr);
+	return (2 + ft_count_hex_digits((unsigned long)ptr));
 }
