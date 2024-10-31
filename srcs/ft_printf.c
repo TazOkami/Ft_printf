@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 10:50:11 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 11:50:52 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format++ == '%')
 		{
-			format++;
 			error = ft_handle_format(&format, args);
 			if (error < 0)
 				return (-1);
+			count += error;
 		}
 		else
 		{
