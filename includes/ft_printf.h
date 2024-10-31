@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:08 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/28 16:07:38 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 12:26:54 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ size_t	ft_strlen(const char *s);
 int		ft_count_digits(int n);
 int		ft_count_unsigned_digits(unsigned int n);
 int		ft_count_hex_digits(uintptr_t n);
+int		ft_handle_error(va_list args);
+int		ft_handle_format(const char **format, va_list args);
 
 #endif
