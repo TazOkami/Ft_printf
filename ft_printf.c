@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 16:20:31 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/10/31 16:41:09 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	ft_process_format(char format, va_list args)
 		return (ft_handle_hex_uppercase(args));
 	if (format == '%')
 	{
-		write(1, "%", 1);
+		if (write(1, "%", 1) < 0)
+			return (-1);
 		return (1);
 	}
 	return (0);
