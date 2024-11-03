@@ -6,23 +6,13 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 09:32:20 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 16:23:19 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 09:51:20 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putnbr_unsigned(unsigned int n)
-{
-	char	c;
-
-	if (n > 9)
-		ft_putnbr_unsigned(n / 10);
-	c = (n % 10) + '0';
-	write(1, &c, 1);
-}
-
-static int	ft_count_unsigned_digits(unsigned int n)
+static int	ft_count_digits_unsigned(unsigned int n)
 {
 	int	count;
 
@@ -37,11 +27,30 @@ static int	ft_count_unsigned_digits(unsigned int n)
 	return (count);
 }
 
+static int	ft_putnbr_unsigned(unsigned int n)
+{
+	char	c;
+	int		count;
+
+	count = 0;
+	if (n > 9)
+	{
+		count = ft_putnbr_unsigned(n / 10);
+		if (count < 0)
+			return (-1);
+	}
+	c = (n % 10) + '0';
+	if (ft_putchar(c) < 0)
+		return (-1);
+	return (count + 1);
+}
+
 int	ft_handle_unsigned(va_list args)
 {
 	unsigned int	value;
 
 	value = va_arg(args, unsigned int);
-	ft_putnbr_unsigned(value);
-	return (ft_count_unsigned_digits(value));
+	if (ft_putnbr_unsigned(value) < 0)
+		return (-1);
+	return (ft_count_digits_unsigned(value));
 }

@@ -6,28 +6,11 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 16:06:29 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 15:53:28 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 09:26:15 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	ft_putnbr(int n)
-{
-	long	num;
-	char	c;
-
-	num = n;
-	if (num < 0)
-	{
-		num = -num;
-		write(1, "-", 1);
-	}
-	if (num > 9)
-		ft_putnbr(num / 10);
-	c = (num % 10) + '0';
-	write(1, &c, 1);
-}
 
 static int	ft_count_digits(int n)
 {
@@ -49,11 +32,31 @@ static int	ft_count_digits(int n)
 	return (count);
 }
 
+static int	ft_putnbr(int n)
+{
+	long	num;
+	char	c;
+
+	num = n;
+	if (num < 0)
+	{
+		num = -num;
+		if (ft_putchar('-') < 0)
+			return (-1);
+	}
+	if (num > 9)
+		if (ft_putnbr(num / 10) < 0)
+			return (-1);
+	c = (num % 10) + '0';
+	return (ft_putchar(c));
+}
+
 int	ft_handle_decimal(va_list args)
 {
 	int	value;
 
 	value = va_arg(args, int);
-	ft_putnbr(value);
+	if (ft_putnbr(value) < 0)
+		return (-1);
 	return (ft_count_digits(value));
 }

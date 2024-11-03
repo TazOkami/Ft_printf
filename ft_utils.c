@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 01:36:03 by  jpaulis          #+#    #+#             */
-/*   Updated: 2024/10/31 16:23:36 by Jpaulis          ###   ########.fr       */
+/*   Created: 2024/11/02 07:39:18 by Jpaulis           #+#    #+#             */
+/*   Updated: 2024/11/02 09:26:17 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ft_strlen - Calcule la longueur 
- * de la chaîne de caractères c 
- * (ne compte pas le caractère nul '\0')
- * Retourne la longueur de la chaîne de caractères
- */
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_putchar(char c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	if (write(1, &c, 1) < 0)
+		return (-1);
+	return (1);
 }
 
-/*
-#include <stdio.h>
-
-int main(void)
+int	ft_putstr(char *str)
 {
-	char str[] = "Hello, world!";
-	int len = ft_strlen(str);
+	int	len;
 
-	printf("Length: %d\n", len);
-
-	return 0;
+	len = 0;
+	if (!str)
+		str = "(null)";
+	while (str[len])
+	{
+		if (ft_putchar(str[len]) < 0)
+			return (-1);
+		len++;
+	}
+	return (len);
 }
-*/

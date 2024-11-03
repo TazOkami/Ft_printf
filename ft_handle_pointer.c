@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 12:27:38 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 16:41:34 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 10:00:02 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,34 @@
 
 static int	ft_putptr(unsigned long n)
 {
-	char	c;
 	char	*str ;
+	int		count;
 
 	str = "0123456789abcdef";
+	count = 0;
 	if (n >= 16)
 	{
-		ft_putptr(n / 16);
+		count = ft_putptr(n / 16);
+		if (count < 0)
+			return (-1);
 	}
-	c = str[n % 16];
-	if (write(1, &c, 1) < 0)
+	if (ft_putchar(str[n % 16]) < 0)
 		return (-1);
-	return (1);
+	return (count + 1);
 }
 
 int	ft_handle_pointer(va_list args)
 {
 	void	*ptr;
+	int		count;
 
+	count = 0;
 	ptr = va_arg(args, void *);
-	if (ptr == NULL)
-	{
-		if (write(1, "0x0", 3) < 0)
-			return (-1);
-		return (3);
-	}
-	if (write(1, "0x", 2) < 0)
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	count = ft_putstr("0x");
+	if (count < 0)
 		return (-1);
-	ft_putptr((unsigned long)ptr);
-	return (2 + ft_count_hex_digits((unsigned long)ptr));
+	count += ft_putptr((unsigned long)ptr);
+	return (count);
 }

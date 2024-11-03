@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 16:41:09 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 09:12:09 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,47 +37,44 @@ static int	ft_process_format(char format, va_list args)
 	return (0);
 }
 
-static int	ft_writ_char(char c)
+static int	ft_handle_format(const char **format, va_list args)
 {
-	if (write(1, &c, 1) < 0)
-		return (-1);
-	return (1);
-}
+	int	result;
 
-static int	ft_process_specifier(const char **format, va_list args)
-{
-	int	error;
-
-	error = ft_process_format(**format, args);
-	if (error < 0)
-		return (-1);
-	return (error);
+	if (**format == '%')
+	{
+		(*format)++;
+		result = ft_process_format(**format, args);
+		if (result < 0)
+			return (-1);
+	}
+	else
+	{
+		result = ft_putchar(**format);
+		if (result < 0)
+			return (-1);
+	}
+	(*format)++;
+	return (result);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	int		count;
 	va_list	args;
-	int		error;
+	int		result;
 
 	va_start(args, format);
 	count = 0;
 	while (*format)
 	{
-		if (*format == '%')
-		{
-			format++;
-			error = ft_process_specifier(&format, args);
-		}
-		else
-			error = ft_writ_char(*format);
-		if (error < 0)
+		result = ft_handle_format(&format, args);
+		if (result < 0)
 		{
 			va_end(args);
 			return (-1);
 		}
-		count += error;
-		format++;
+		count += result;
 	}
 	va_end(args);
 	return (count);

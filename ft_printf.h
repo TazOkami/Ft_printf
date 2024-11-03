@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:08 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 16:07:48 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 09:26:59 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ft_handle_unsigned(va_list args);
 int		ft_handle_hex_lowercase(va_list args);
 int		ft_handle_hex_uppercase(va_list args);
 int		ft_handle_pointer(va_list args);
-int		ft_count_hex_digits(unsigned long n);
-size_t	ft_strlen(const char *s);
-
+int		ft_putchar(char c);
+int		ft_putstr(char *str);
 #endif

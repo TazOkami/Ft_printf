@@ -6,7 +6,7 @@
 /*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:51:30 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/10/31 13:39:11 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/02 08:21:53 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,5 @@ int	ft_handle_char(va_list args)
 	char	c;
 
 	c = (char) va_arg(args, int);
-	if (write(1, &c, 1) < 0)
-		return (-1);
-	return (1);
+	return (ft_putchar(c));
 }
