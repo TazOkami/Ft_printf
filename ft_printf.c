@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+        */
+/*   By: Jpaulis <Jpaulis@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:57:27 by Jpaulis           #+#    #+#             */
-/*   Updated: 2024/11/02 09:12:09 by Jpaulis          ###   ########.fr       */
+/*   Updated: 2024/11/16 18:06:51 by Jpaulis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	ft_handle_invalid(char format)
+{
+	if (write(1, "%", 1) < 0)
+		return (-1);
+	if (write(1, &format, 1) < 0)
+		return (-1);
+	return (2);
+}
 
 static int	ft_process_format(char format, va_list args)
 {
@@ -34,6 +43,8 @@ static int	ft_process_format(char format, va_list args)
 			return (-1);
 		return (1);
 	}
+	else
+		return (ft_handle_invalid(format));
 	return (0);
 }
 
