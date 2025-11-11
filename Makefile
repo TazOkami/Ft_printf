@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Jpaulis <jpaulis@student.s19.be>           +#+  +:+       +#+         #
+#    By: jpaulis <jpaulis@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/20 15:08:41 by Jpaulis           #+#    #+#              #
-#    Updated: 2024/11/02 08:25:35 by Jpaulis          ###   ########.fr        #
+#    Updated: 2025/11/11 11:44:25 by jpaulis          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ARFLAGS = rcs
 RM = rm -f
 
 # Fichiers source et objets
-SRCS = ft_handle_char.c ft_handle_decimal.c ft_handle_hex.c ft_handle_pointer.c ft_handle_string.c ft_handle_unsigned.c ft_printf.c ft_utils.c
+SRCS = ft_handle_char.c ft_handle_decimal.c ft_handle_hex.c ft_handle_pointer.c ft_handle_string.c ft_handle_unsigned.c ft_printf.c ft_utils.c main.c
 OBJS = $(SRCS:.c=.o)
 
 # Règle par défaut pour tout compiler
